@@ -8,13 +8,13 @@ export default async function Home() {
   const renderCategories = categories.map((category) => {
     return (
       <div key={category.id} className="relative w-full h-[400px]">
-        <Link href={"/categories/" + category.catergory}>
+        <Link href={`/categories/${category.catergory}`} className="relative block w-full h-full">
           <Image
             src={category.image}
             alt={category.title}
             fill
-            objectFit="cover"
-            className="w-full h-full"
+            className="object-cover w-full h-full"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
           <h2 className="absolute bottom-4 left-4 text-white text-2xl font-bold font-inria-serif">
             {category.title}

@@ -3,6 +3,6 @@ import { db } from "@/db";
 
 
 export default async function AtriclesPage(props:any){
-    
+
 
 }

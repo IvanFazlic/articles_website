@@ -7,15 +7,15 @@ export default function CategoriesAdd() {
     async function CreateCategory(formData: FormData) {
         'use server'
         //main data
-        let title = formData.get('title') as string
+        const title = formData.get('title') as string
         let category = formData.get('category') as string
-        let image = formData.get('image') as string
+        const image = formData.get('image') as string
         category = category.toLowerCase()
         //end
         const categoryObject = await db.categories.create({
             data:{
                 title:title,
-                catergory:category,
+                category:category,
                 image:image
             }
         })

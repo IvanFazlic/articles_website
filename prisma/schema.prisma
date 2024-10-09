@@ -10,9 +10,25 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Categories{
-  id Int @id @default(autoincrement())
-  title String
-  catergory String
-  image String
+model Categories {
+  id        Int       @id @default(autoincrement())
+  title     String
+  category  String     @unique
+  image     String
+  articles  Articles[] 
 }
+
+model Articles {
+  id               Int         @id @default(autoincrement())
+  title            String
+  author           String
+  topImage         String
+  topParagraph     String
+  middleImage      String
+  middleParagraph  String
+  bottomImage      String
+  bottomParagraph  String
+  categories       Categories[]
+}
+
+

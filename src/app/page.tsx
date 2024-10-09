@@ -1,7 +1,33 @@
-export default function Home() {
+import { db } from "@/db";
+import Link from "next/link";
+import Video from "@/components/video"; 
+
+interface Category {
+  id: number; 
+  category: string;
+  title: string;
+  image: string; 
+}
+
+export default async function HomePage() {
+  const categories: Category[] = await db.categories.findMany(); 
+
+  const renderCategories = categories.map((category) => {
+    return (
+      <div key={category.id} className="relative w-full h-[400px] overflow-hidden">
+        <Link href={`/categories/${category.category}`} className="relative block w-full h-full">
+          <Video src={category.image} />
+          <h2 className="absolute bottom-4 left-4 text-white text-2xl font-bold font-inria-serif">
+            {category.title}
+          </h2>
+        </Link>
+      </div>
+    );
+  });
+
   return (
     <div>
-      
+      {renderCategories}
     </div>
   );
 }

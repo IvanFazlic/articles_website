@@ -6,13 +6,16 @@ import { db } from "@/db";
 export default function CategoriesAdd() {
     async function CreateCategory(formData: FormData) {
         'use server'
+        //main data
         const title = formData.get('title') as string
-        const category = formData.get('category') as string
+        let category = formData.get('category') as string
         const image = formData.get('image') as string
+        category = category.toLowerCase()
+        //end
         const categoryObject = await db.categories.create({
             data:{
                 title:title,
-                catergory:category,
+                category:category,
                 image:image
             }
         })

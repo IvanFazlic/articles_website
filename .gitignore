@@ -15,7 +15,7 @@
 
 # production
 /build
-/src/app/categories
+/src/app/categories/
 
 # misc
 .DS_Store

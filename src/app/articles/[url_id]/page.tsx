@@ -6,7 +6,7 @@ interface Article{
     }
 }
 export default async function ArticlesPage({params} : Article){
-    const article = await db.articles.findFirst({
+    const article = await db.articles.findUnique({
         where:{
             id : parseInt(params.url_id) 
         }

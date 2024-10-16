@@ -1,21 +1,25 @@
 -- CreateTable
 CREATE TABLE "Categories" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "category" TEXT NOT NULL,
-    "image" TEXT NOT NULL
+    "image" TEXT NOT NULL,
+
+    CONSTRAINT "Categories_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Articles" (
-    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
     "author" TEXT NOT NULL,
     "topImage" TEXT NOT NULL,
     "middleImage" TEXT NOT NULL,
     "bottomImage" TEXT NOT NULL,
     "paragraphText" TEXT NOT NULL,
-    "category" TEXT NOT NULL
+    "category" TEXT NOT NULL,
+
+    CONSTRAINT "Articles_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex

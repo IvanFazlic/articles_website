@@ -20,3 +20,6 @@ CREATE TABLE "Articles" (
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Categories_category_key" ON "Categories"("category");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Articles_category_key" ON "Articles"("category");

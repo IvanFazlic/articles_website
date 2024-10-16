@@ -1,6 +1,7 @@
 import { db } from "@/db";
 import Link from "next/link";
 import Video from "@/components/video"; 
+import { notFound } from "next/navigation";
 
 interface Category {
   id: number; 
@@ -11,7 +12,9 @@ interface Category {
 
 export default async function HomePage() {
   const categories: Category[] = await db.categories.findMany(); 
-
+  if(categories.length <= 0){
+    return notFound();
+  }
   const renderCategories = categories.map((category) => {
     return (
       <div key={category.id} className="relative w-full h-[400px] overflow-hidden">

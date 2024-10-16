@@ -20,11 +20,7 @@ interface Articles{
 }
 
 export default async function DymanicArticles({ params }: ArticleParams){
-    const articles:Articles[] = await db.articles.findMany({
-        where:{
-            category : params.url_input
-        }
-    })
+    const articles:Articles[] = await db.articles.findMany()
     
     if(articles.length <= 0){
         return notFound();

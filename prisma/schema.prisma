@@ -24,9 +24,8 @@ model Articles {
   topImage         String
   middleImage      String
   bottomImage      String
-  //JSON.stringify(list)
   paragraphText    String
-  category       String
+  category         String      @unique
 }
 
 

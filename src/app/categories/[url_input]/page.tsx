@@ -1,6 +1,7 @@
 import { db } from '@/db'
 import Image from 'next/image';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 interface Article{
     params:{
@@ -15,6 +16,9 @@ export default async function DymanicArticles({ params }: Article){
         }
     }
     )
+    if(articles.length <= 0){
+        return notFound();
+    }
     const renderedArticles = articles.map(article =>{
         return (
             <div key={article.id} className="relative">

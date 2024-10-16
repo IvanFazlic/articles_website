@@ -3,19 +3,29 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
-interface Article{
+interface ArticleParams{
     params:{
         url_input : string
     }
 }
+interface Articles{
+    id:number   
+    title:string
+    author:string
+    topImage:string
+    middleImage:string
+    bottomImage:string
+    paragraphText:string
+    category:string
+}
 
-export default async function DymanicArticles({ params }: Article){
-    const articles = await db.articles.findMany({
+export default async function DymanicArticles({ params }: ArticleParams){
+    const articles:Articles[] = await db.articles.findMany({
         where:{
             category : params.url_input
         }
-    }
-    )
+    })
+    
     if(articles.length <= 0){
         return notFound();
     }

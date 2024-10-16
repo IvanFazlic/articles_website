@@ -15,7 +15,6 @@ model Categories {
   title     String
   category  String     @unique
   image     String
-  articles  Articles[] 
 }
 
 model Articles {
@@ -23,12 +22,11 @@ model Articles {
   title            String
   author           String
   topImage         String
-  topParagraph     String
   middleImage      String
-  middleParagraph  String
   bottomImage      String
-  bottomParagraph  String
-  categories       Categories[]
+  //JSON.stringify(list)
+  paragraphText    String
+  category       String
 }
 
 

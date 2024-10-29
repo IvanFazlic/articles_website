@@ -1,14 +1,14 @@
 .content {
-    margin: 0 40px; /* Adjust the left margin as needed */
+    margin: 0 25rem; /* Adjust the left margin as needed */
     /* Keep text aligned to the left by default */
 }
 .content h1 {
     font-size: 2.5rem;
-    color: #2a6f97; /* Example color for h3 */
+    color: black; /* Example color for h3 */
 }
 .content h3 {
     font-size: 1.5rem;
-    color: #2a6f97; /* Example color for h3 */
+    color: black; /* Example color for h3 */
     margin-top: 1.5em;
 }
 
@@ -27,7 +27,6 @@
 .content ul li {
     list-style-type: disc;
     margin-bottom: 0.5em;
-    font-weight: bold; /* Example styling for list items */
 }
 
 /* Center the Image components */
@@ -35,5 +34,7 @@
     display: flex;
     justify-content: center; /* Center images horizontally */
     margin: 1em 0; /* Optional: add vertical spacing around images */
-    border-bottom: 50px solid #D9D9D9;
+}
+.imageWrapper div{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Soft shadow effect */
 }

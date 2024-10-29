@@ -8,16 +8,7 @@ interface ArticleParams{
         url_input : string
     }
 }
-interface Articles{
-    id:number   
-    title:string
-    author:string
-    topImage:string
-    middleImage:string
-    bottomImage:string
-    paragraphText:string
-    category:string
-}
+
 
 export default async function DymanicArticles({params} : ArticleParams){
     const articles = await db.articles.findMany({

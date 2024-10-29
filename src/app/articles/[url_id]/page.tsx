@@ -12,6 +12,7 @@ interface Article {
 
 export default async function ArticlesPage({ params }: Article) {
     const articleId = parseInt(params.url_id, 10);
+
     if (isNaN(articleId)) {
         return notFound();
     }
@@ -21,6 +22,7 @@ export default async function ArticlesPage({ params }: Article) {
             id: articleId,
         },
     });
+
     if (!article) {
         return notFound();
     }
@@ -28,7 +30,6 @@ export default async function ArticlesPage({ params }: Article) {
     let renderText: string[];
     try {
         renderText = JSON.parse(article.paragraphText);
-        console.log(renderText);
         
     } catch (error) {
         console.error("Error parsing paragraphText:", error);
@@ -43,33 +44,39 @@ export default async function ArticlesPage({ params }: Article) {
             <div key={index}>
                 {index === 0 && (
                     <div className={styles.imageWrapper}>
-                        <Image 
-                            src={article.topImage} 
-                            alt="Top Image" 
-                            width={600}  // Specify appropriate width
-                            height={400} // Specify appropriate height
-                        />
+                        <div>
+                            <Image 
+                                src={article.topImage} 
+                                alt="Top Image" 
+                                width={600}  // Specify appropriate width
+                                height={400} // Specify appropriate height
+                            />
+                        </div>
                     </div>
                 )}
                 <div dangerouslySetInnerHTML={{ __html: sanitizedText }} />
                 {element.includes('Key Takeaways') && (
                     <div className={styles.imageWrapper}>
-                        <Image 
-                            src={article.middleImage} 
-                            alt="Middle Image" 
-                            width={600}  // Specify appropriate width
-                            height={400} // Specify appropriate height
-                        />
+                        <div>
+                            <Image 
+                                src={article.middleImage} 
+                                alt="Middle Image" 
+                                width={600}  // Specify appropriate width
+                                height={400} // Specify appropriate height
+                            />
+                        </div>
                     </div>
                 )}
-                {index === renderText.length - 1 && (
+                {index === renderText.length - 2 && (
                     <div className={styles.imageWrapper}>
-                        <Image 
-                            src={article.bottomImage} 
-                            alt="Bottom Image" 
-                            width={600}  // Specify appropriate width
-                            height={400} // Specify appropriate height
-                        />
+                        <div>
+                            <Image 
+                                src={article.bottomImage} 
+                                alt="Bottom Image" 
+                                width={600}  // Specify appropriate width
+                                height={400} // Specify appropriate height
+                            />
+                        </div>
                     </div>
                 )}
             </div>
@@ -78,7 +85,7 @@ export default async function ArticlesPage({ params }: Article) {
 
     return (
         <div className={styles.content}>
-            <h1>{article.title}</h1>
+            <h1 style={{textAlign:"center"}}>{article.title}</h1>
             {display}
         </div>
     );

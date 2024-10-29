@@ -19,7 +19,7 @@ export default async function HomePage() {
 
   const renderCategories = categories.map((category) => {
     return (
-      <div key={category.id} className="relative w-full h-[400px] overflow-hidden">
+      <div key={category.id} className="relative w-full h-[400px] overflow-hidden border-b-2 border-black">
         <Link href={`/categories/${category.category}`} className="relative block w-full h-full">
           <Video src={category.image} />
           <h2 className="absolute bottom-4 left-4 text-white text-2xl font-bold font-inria-serif">

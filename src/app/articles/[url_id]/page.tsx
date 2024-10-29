@@ -1,39 +1,84 @@
-import {db} from "@/db"
-import { notFound } from "next/navigation"
-import DOMPurify from 'dompurify';
-interface Article{
-    params:{
-        url_id: string
-    }
+import { db } from "@/db";
+import { notFound } from "next/navigation";
+import DOMPurify from "isomorphic-dompurify";
+import Image from 'next/image';
+import styles from './styles.module.css'
+
+interface Article {
+    params: {
+        url_id: string;
+    };
 }
-export default async function ArticlesPage({params} : Article){
-    const article = await db.articles.findUnique({
-        where:{
-            id : parseInt(params.url_id) 
-        }
-    })
-    if(article == null){
-        return notFound()
+
+export default async function ArticlesPage({ params }: Article) {
+    const articleId = parseInt(params.url_id, 10);
+    if (isNaN(articleId)) {
+        return notFound();
     }
-    const text = article.paragraphText
-    const renderText = JSON.parse(text)
-    //check in array length is larger than 2
-    const display = renderText.map((element: any, index: number) => {
-        console.log(element);
+
+    const article = await db.articles.findUnique({
+        where: {
+            id: articleId,
+        },
+    });
+    if (!article) {
+        return notFound();
+    }
+
+    let renderText: string[];
+    try {
+        renderText = JSON.parse(article.paragraphText);
+        console.log(renderText);
         
+    } catch (error) {
+        console.error("Error parsing paragraphText:", error);
+        return notFound();
+    }
+    
+    
+
+    const display = renderText.map((element: string, index: number) => {
+        const sanitizedText = DOMPurify.sanitize(element)
         return (
             <div key={index}>
-                {index == 0 ? article.topImage : ''}
-                {index == renderText.length - 2 ? article.bottomImage : ''}
-                <div dangerouslySetInnerHTML={{ __html: element }} />
-                {element.includes('Key Takeaways') ? article.middleImage : ''}
+                {index === 0 && (
+                    <div className={styles.imageWrapper}>
+                        <Image 
+                            src={article.topImage} 
+                            alt="Top Image" 
+                            width={600}  // Specify appropriate width
+                            height={400} // Specify appropriate height
+                        />
+                    </div>
+                )}
+                <div dangerouslySetInnerHTML={{ __html: sanitizedText }} />
+                {element.includes('Key Takeaways') && (
+                    <div className={styles.imageWrapper}>
+                        <Image 
+                            src={article.middleImage} 
+                            alt="Middle Image" 
+                            width={600}  // Specify appropriate width
+                            height={400} // Specify appropriate height
+                        />
+                    </div>
+                )}
+                {index === renderText.length - 1 && (
+                    <div className={styles.imageWrapper}>
+                        <Image 
+                            src={article.bottomImage} 
+                            alt="Bottom Image" 
+                            width={600}  // Specify appropriate width
+                            height={400} // Specify appropriate height
+                        />
+                    </div>
+                )}
             </div>
         );
     });
-    
+
     return (
-        <div>
-            <h1 style={{fontSize:'2rem'}}>{article.title}</h1>
+        <div className={styles.content}>
+            <h1>{article.title}</h1>
             {display}
         </div>
     );

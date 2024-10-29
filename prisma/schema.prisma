@@ -13,19 +13,18 @@ datasource db {
 model Categories {
   id        Int       @id @default(autoincrement())
   title     String
-  category  String     @unique
+  category  String    @unique
   image     String
+  articles  Articles[] // Relation to Articles
 }
 
 model Articles {
-  id               Int         @id @default(autoincrement())
+  id               Int        @id @default(autoincrement())
   title            String
-  author           String
   topImage         String
   middleImage      String
   bottomImage      String
   paragraphText    String
-  category         String      
+  categoryId       Int        // Foreign key to Categories
+  category         Categories  @relation(fields: [categoryId], references: [id])
 }
-
-

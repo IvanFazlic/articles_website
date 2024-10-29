@@ -20,11 +20,15 @@ interface Articles{
 }
 
 export default async function DymanicArticles({params} : ArticleParams){
-    const articles:Articles[] = await db.articles.findMany({
-        where:{
-            category: params.url_input
+    const articles = await db.articles.findMany({
+        where: {
+            category: {
+                category: params.url_input 
+            }
         }
-    })
+    });
+    
+    
     
     if(articles.length <= 0){
         return notFound();
@@ -35,7 +39,7 @@ export default async function DymanicArticles({params} : ArticleParams){
               <div className="overflow-hidden">
                   <Image 
                       src={article.topImage} 
-                      alt={article.author} 
+                      alt={article.title} 
                       width={800}
                       height={450}
                       className="w-full h-auto transition-transform duration-300 group-hover:scale-110 group-hover:opacity-100" // Set opacity on hover

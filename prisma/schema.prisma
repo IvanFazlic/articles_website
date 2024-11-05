@@ -16,7 +16,7 @@ model Categories {
   title     String
   category  String    @unique
   image     String
-  articles  Articles[] // Relation to Articles
+  articles  Articles[]
 }
 
 model Articles {
@@ -27,5 +27,6 @@ model Articles {
   bottomImage      String
   paragraphText    String
   categoryId       Int        // Foreign key to Categories
-  category         Categories  @relation(fields: [categoryId], references: [id])
+  category         Categories @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  date             DateTime   @default(now()) // Automatically assigns the current date and time
 }

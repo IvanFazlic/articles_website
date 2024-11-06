@@ -10,6 +10,6 @@ export default async function searchArticles(id: number): Promise<Articles[] | u
         return articles;
     } catch (error) {
         console.error("Error fetching articles:", error);
-        return undefined;
     }
+    return undefined;
 }

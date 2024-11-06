@@ -9,6 +9,6 @@ export default async function removeArticle(id: number): Promise<boolean> {
         return true;
     } catch (error) {
         console.error("Error deleting article:", error);
-        return false;
     }
+    return false;
 }

@@ -15,11 +15,11 @@ export default function Ticket() {
         setFormVisible(!isFormVisible);
     };
 
-    const handleCaptchaChange = (value: any) => {
+    const handleCaptchaChange = (value: string | null) => {
         setCaptchaVerified(!!value); 
     };
 
-    const handleSubmit = async (e: any) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!isCaptchaVerified) {
             alert("Please complete the CAPTCHA before submitting!");

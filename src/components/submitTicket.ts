@@ -12,7 +12,7 @@ export default async function submitTicket(email: string | null, description:str
                 description: description
             }
         });
-        console.log("Created");
+        console.log("Created a ticket");
         
         return true;
     } catch (error) {
